@@ -32,6 +32,9 @@
     <EmbeddedResource Include="Pages\FindFlightPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Include="Pages\SearchResultPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">
@@ -40,7 +43,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Pages\BasePage.cs" />
     <Compile Include="CustomControls\LocationPickerEntry.cs" />
-    <Compile Include="CustomControls\CountryPicker.cs" />
     <Compile Include="Viewmodels\FindFlightsViewModel.cs" />
     <Compile Include="Pages\FindFlightPage.xaml.cs">
       <DependentUpon>FindFlightPage.xaml</DependentUpon>
@@ -49,6 +51,11 @@
     <Compile Include="IReadCountriesJson.cs" />
     <Compile Include="Viewmodels\BaseViewModel.cs" />
     <Compile Include="Models\LabelCountries.cs" />
+    <Compile Include="Pages\SearchResultPage.xaml.cs">
+      <DependentUpon>SearchResultPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Viewmodels\SearchResultViewModel.cs" />
+    <Compile Include="CustomControls\BindablePicker.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Xamarin.Forms.Core">

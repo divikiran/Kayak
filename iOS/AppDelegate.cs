@@ -14,8 +14,9 @@ namespace Kayak.iOS
 		{
 			global::Xamarin.Forms.Forms.Init();
 
+			var appPort = new App();
 			App.ScreenWidth = (int)UIScreen.MainScreen.Bounds.Width;
-			LoadApplication(new App());
+			LoadApplication(appPort);
 			return base.FinishedLaunching(app, options);
 		}
 	}

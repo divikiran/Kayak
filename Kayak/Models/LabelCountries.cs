@@ -1,10 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using Xamarin.Forms;
 
 namespace Kayak
 {
 	public class LabelCountries: BaseViewModel
 	{
+		public LabelCountries(string locationText)
+		{
+			LocationText = locationText;
+		}
 		private string _locationText;
 		public string LocationText
 		{
