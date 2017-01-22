@@ -7,12 +7,6 @@ namespace Kayak
 {
 	public partial class SearchResultPage : BasePage
 	{
-		public FindFlightsViewModel ParentViewModel
-		{
-			get;
-			set;
-		}
-
 		public SearchResultViewModel ViewModel
 		{
 			get;
@@ -20,7 +14,7 @@ namespace Kayak
 		}
 		public SearchResultPage(FindFlightsViewModel parentViewModel)
 		{
-			
+			this.Title = "Search Result";
 			ViewModel = new SearchResultViewModel();
 			ViewModel.ParentViewModel = parentViewModel;
 			BindingContext = ViewModel;

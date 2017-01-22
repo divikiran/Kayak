@@ -35,6 +35,9 @@
     <EmbeddedResource Include="Pages\SearchResultPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Include="Pages\AirportSearchPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">
@@ -56,6 +59,11 @@
     </Compile>
     <Compile Include="Viewmodels\SearchResultViewModel.cs" />
     <Compile Include="CustomControls\BindablePicker.cs" />
+    <Compile Include="CustomControls\AirportSearch.cs" />
+    <Compile Include="Pages\AirportSearchPage.xaml.cs">
+      <DependentUpon>AirportSearchPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Viewmodels\AirportSearchViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Xamarin.Forms.Core">

@@ -17,6 +17,7 @@ namespace Kayak
 		public FindFlightPage()
 		{
 			InitializeComponent();
+
 			ViewModel = new FindFlightsViewModel(Navigation);
 			BindingContext = ViewModel;
 		}

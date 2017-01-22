@@ -103,7 +103,14 @@ namespace Kayak
 			TripType = "Trip Type : " + ParentViewModel?.RoundTripText;
 			CityFrom = "From: " + Environment.NewLine + ParentViewModel?.FromCountries?.SelectedCountry?.Name;
 			CityTo = "To: " + Environment.NewLine + ParentViewModel?.ToCountries?.SelectedCountry?.Name;
-			SelectedDateRange = (TripType == "One way" ? "Travel On: " : "Selected date range:") + Environment.NewLine + "From " + ParentViewModel?.FromDate.ToString("D") + (TripType == "One way" ? (Environment.NewLine + "To " + ParentViewModel?.ToDate.ToString("D")) : string.Empty);
+
+			SelectedDateRange = "Travel On: " + ParentViewModel.FromDate.ToString("D");
+			if (ParentViewModel?.RoundTripText == "Round Trip")
+			{
+				SelectedDateRange = "Selected date range: " + Environment.NewLine;
+				SelectedDateRange += "From: " + ParentViewModel.FromDate.ToString("D") + Environment.NewLine;
+				SelectedDateRange += "To: " + ParentViewModel.ToDate.ToString("D") + Environment.NewLine;
+			}
 		}
 	}
 }

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+
 namespace Kayak
 {
 	public class Country
@@ -12,5 +14,10 @@ namespace Kayak
 		public string Type { get; set; }
 		public string Lat { get; set; }
 		public string Size { get; set; }
+
+		public static explicit operator Country(List<Country> v)
+		{
+			throw new NotImplementedException();
+		}
 	}
 }

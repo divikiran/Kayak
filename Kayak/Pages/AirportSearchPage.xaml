@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kayak:BasePage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:kayak="clr-namespace:Kayak;assembly=Kayak" x:Class="Kayak.AirportSearchPage">
+	<kayak:BasePage.Content>
+		<StackLayout>
+			<SearchBar SearchCommand="{Binding FilterCourtryCommand}" Text="{Binding SearchText}" />
+			<ListView x:Name="CountryListView" ItemsSource="{Binding ParentViewModel.CountriesListView}" RowHeight="85" VerticalOptions="CenterAndExpand">
+				<ListView.ItemTemplate>
+					<DataTemplate>
+						<ViewCell>
+							<StackLayout VerticalOptions="CenterAndExpand" Padding="20">
+								<Label Text="{Binding Name}" LineBreakMode="WordWrap" />
+								<Label Text="{Binding Iata}" LineBreakMode="WordWrap" FontSize="10" />
+							</StackLayout>
+						</ViewCell>
+					</DataTemplate>
+				</ListView.ItemTemplate>
+			</ListView>
+		</StackLayout>
+	</kayak:BasePage.Content>
+</kayak:BasePage>

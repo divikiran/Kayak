@@ -5,23 +5,49 @@ using Xamarin.Forms;
 using System.Linq;
 using System.Windows.Input;
 using System.Threading.Tasks;
+using System.Collections.ObjectModel;
+using System.IO;
+using System.Reflection;
 
 namespace Kayak
 {
 	public class FindFlightsViewModel : BaseViewModel
 	{
-		INavigation Navigation;
+		public INavigation Navigation;
+
+		string _airportText;
+		public string AirportText
+		{
+			get
+			{
+				return _airportText;
+			}
+
+			set
+			{
+				_airportText = value;
+				RaisePropertyChanged("AirportText");
+			}
+		}
 
 		public ICommand SwapCommand { get; private set;}
 
 		async Task SwapCommandAction(object f)
 		{
-			var thirdVariable = ToCountries.SelectedCountry;
-			ToCountries.SelectedCountry = FromCountries.SelectedCountry;
-			FromCountries.SelectedCountry = thirdVariable;
+			var toCountry = ToCountries.SelectedCountry;
+			var fromCountry = FromCountries.SelectedCountry;
+
+			if (toCountry.Name == "From" || fromCountry.Name == "From"
+			   || toCountry.Name == "To" || fromCountry.Name == "To")
+			{
+				return;
+			}
+
+			ToCountries.SelectedCountry = fromCountry;
+			FromCountries.SelectedCountry = toCountry;
 		}
 
-		public ICommand FindFlightsSearchPage { get; private set;}
+		public ICommand FindFlightsCommand { get; private set;}
 
 		async Task FindFlightsSearchAction(object obj)
 		{
@@ -84,7 +110,6 @@ namespace Kayak
 					RoundTripText = "Round Trip";
 					ToDateVisibility = true;
 					FromDateText = "From: ";
-					//ToDate = ToDate == null ? DateTime.Now : ToDate;
 				}
 				else {
 					RoundTripText = "One way";
@@ -106,14 +131,25 @@ namespace Kayak
 			}
 		}
 
-		private List<Country> _countries;
-		public List<Country> Countries
+		private ObservableCollection<Country> _countries;
+		public ObservableCollection<Country> Countries
 		{
 			get { return _countries; }
 			set
 			{
 				_countries = value;
 				RaisePropertyChanged("Countries");
+			}
+		}
+
+		private ObservableCollection<Country> _countriesListView;
+		public ObservableCollection<Country> CountriesListView
+		{
+			get { return _countriesListView; }
+			set
+			{
+				_countriesListView = value;
+				RaisePropertyChanged("CountriesListView");
 			}
 		}
 
@@ -207,23 +243,36 @@ namespace Kayak
 
 			MinimumDate = DateTime.Now;
 			MaximumDate = new DateTime(2020, 12, 31);
+
 			SwapCommand = new Command(async (f) => await SwapCommandAction(f));
-			FindFlightsSearchPage = new Command(async (f) => await FindFlightsSearchAction(f));
+			FindFlightsCommand = new Command(async (f) => await FindFlightsSearchAction(f));
+
 			if (Countries == null)
 			{
-				Countries = new List<Country>();
+				Countries = new ObservableCollection<Country>();
 				IReadCountriesJson countriesReadText = DependencyService.Get<IReadCountriesJson>();
-				Countries = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Country>>(countriesReadText?.ReadAllText());
+				Countries = Newtonsoft.Json.JsonConvert.DeserializeObject<ObservableCollection<Country>>(countriesReadText?.ReadAllText());
 				var SortedCountries = Countries.Where(w=> !string.IsNullOrEmpty(w.Name) && w.Type == "airport").OrderBy(o => o.Name).ToList();
 
-				var defaultSelected = SortedCountries.FirstOrDefault();
-				FromCountries = new LabelCountries("From")
+				//var SortedCountries = new List<Country>();
+				//var assembly = typeof(Label).GetTypeInfo().Assembly;
+				//Stream stream = assembly.GetManifestResourceStream("airports.json");
+
+				  
+				CountriesListView = new ObservableCollection<Country>();
+				foreach (var item in SortedCountries)
 				{
-					Countries = SortedCountries
+					CountriesListView.Add(item);
+				}
+
+
+				FromCountries = new LabelCountries("From", this)
+				{
+					Countries = SortedCountries.ToList()
 				};
-				ToCountries = new LabelCountries("To")
+				ToCountries = new LabelCountries("To", this)
 				{
-					Countries = SortedCountries
+					Countries = SortedCountries.ToList()
 				};
 			}
 		}
@@ -239,7 +288,5 @@ namespace Kayak
 			base.OnDisappearing();
 			Debug.WriteLine("OnDisappearing");
 		}
-
-
 	}
 }

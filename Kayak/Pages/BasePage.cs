@@ -9,6 +9,8 @@ namespace Kayak
 		public BasePage()
 		{
 			this.Title = "Kayak";
+			//this.BackgroundImage = "kayak.jpg";
+
 		}
 
 		protected override void OnAppearing()

@@ -19,5 +19,16 @@ namespace Kayak.iOS
 			LoadApplication(appPort);
 			return base.FinishedLaunching(app, options);
 		}
+
+		//Background fetch
+		public override void PerformFetch(UIApplication application, Action<UIBackgroundFetchResult> completionHandler)
+		{
+			base.PerformFetch(application, completionHandler);
+
+			//List country endpoint
+
+
+
+		}
 	}
 }

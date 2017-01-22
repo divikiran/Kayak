@@ -8,8 +8,6 @@ namespace Kayak
 		public App()
 		{
 			InitializeComponent();
-
-			//MainPage = new FindFlightPage();
 			MainPage = new NavigationPage(new FindFlightPage());
 		}
 
