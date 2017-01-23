@@ -2,7 +2,7 @@
 <kayak:BasePage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:kayak="clr-namespace:Kayak;assembly=Kayak" x:Class="Kayak.AirportSearchPage">
 	<kayak:BasePage.Content>
 		<StackLayout>
-			<SearchBar SearchCommand="{Binding FilterCourtryCommand}" Text="{Binding SearchText}" />
+			<SearchBar SearchCommand="{Binding FilterCourtryCommand}" Text="{Binding SearchText}" Placeholder="Search Airports" />
 			<ListView x:Name="CountryListView" ItemsSource="{Binding ParentViewModel.CountriesListView}" RowHeight="85" VerticalOptions="CenterAndExpand">
 				<ListView.ItemTemplate>
 					<DataTemplate>
